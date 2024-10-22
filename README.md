@@ -31,7 +31,7 @@ In the context of the Postgres client application you provided, the REPL allows 
 ## Prerequisites
 
 - Python 3.7 or higher
-- Access to a PostgreSQL database instance (Tembo offers free trial, no card needed)
+- Access to a PostgreSQL database instance ([Tembo](https://tembo.io/) offers free trial, no card needed)
 - Database connection details (host, database name, username, password)
 
 ## Installation
@@ -51,10 +51,10 @@ pip install -r requirements.txt
 
 ## Configuration
 
-Before running the application, update the database connection details in the config.py file:
+Before running the application, create a file called config.py file with the database connection details:
 
 ```python
-host = "your-postgres-host.amazonaws.com"
+host = "your-postgres-host.provider.com"
 database = "your_database"
 user = "your_username"
 password = "your_password"
@@ -64,7 +64,7 @@ password = "your_password"
 
 1. Start the application:
 ```bash
-python postgres_client.py
+python postgres-client-app.py
 ```
 
 2. Once the application is running, you can:

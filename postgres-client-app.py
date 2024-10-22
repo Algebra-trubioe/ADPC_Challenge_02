@@ -32,7 +32,7 @@ def print_table_info(cursor, table_name):
     print("Column Name | Data Type | Constraints")
     print("-" * 50)
     for column in columns:
-        print(f"{column['column_name']} | {column['data_type']} | {column['column_default'], column['is_nullable'], column['constraint_name']}")
+        print(f"{column['column_name']} | {column['data_type']} | {column['column_default'], column['is_nullable']}")
     print()
 
 def format_result_set(cursor):
