@@ -51,13 +51,16 @@ pip install -r requirements.txt
 
 ## Configuration
 
-Before running the application, create a file called config.py file with the database connection details:
+Before running the application, create a file called config.py file with the database connection details (these are stored on a python dictionary):
 
 ```python
-host = "your-postgres-host.provider.com"
-database = "your_database"
-user = "your_username"
-password = "your_password"
+DB_CONFIG = {
+    "host" : "<host>",
+    "database" : "postgres",
+    "user" : "postgres",
+    "password" : "<password>",
+    "port": "5432"
+}
 ```
 
 ## Usage
