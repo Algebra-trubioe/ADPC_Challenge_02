@@ -1,14 +1,14 @@
-# Postgres Client REPL Application
+# PostgreSQL Client REPL Application
 
-A command-line client application that enables users to connect to a Postgres instance in the cloud and interact with it through a REPL (Read-Evaluate-Print Loop) interface.
+A simple interactive command-line client for PostgreSQL databases that provides enhanced formatting and table information viewing capabilities.
 
 ## Features
 
-- Interactive REPL for executing SQL queries
-- Formatted output for SELECT query results
-- Table information command (`\t <table_name>`) to display column details
-- Error handling for SQL operations
-- Clean and formatted output presentation
+- Interactive REPL (Read-Eval-Print Loop) interface
+- Formatted query results with aligned columns
+- Table structure inspection command
+- Error handling with automatic transaction rollback
+- Support for all PostgreSQL queries and commands
 
 ### More about REPL
 
@@ -30,91 +30,75 @@ In the context of the Postgres client application you provided, the REPL allows 
 
 ## Prerequisites
 
-- Python 3.7 or higher
-- Access to a PostgreSQL database instance ([Tembo](https://tembo.io/) offers free trial, no card needed)
-- Database connection details (host, database name, username, password)
+- PostgreSQL database server ([Tembo](https://tembo.io/) provides no 14 days card free trial)
 
 ## Installation
 
-1. Clone this repository
+1. Clone this repository or download the source code
+2. Install the required dependencies:
 
-2. Create a virtual environment (recommended):
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows, use: venv\Scripts\activate
-```
-
-3. Install the required packages:
 ```bash
 pip install -r requirements.txt
 ```
 
 ## Configuration
 
-Before running the application, create a file called config.py file with the database connection details (these are stored on a python dictionary):
+Update the database connection settings in `config.py`:
 
 ```python
 DB_CONFIG = {
-    "host" : "<host>",
-    "database" : "postgres",
-    "user" : "postgres",
-    "password" : "<password>",
-    "port": "5432"
+    'host': 'your-host',
+    'database': 'your-database',
+    'user': 'your-username',
+    'password': 'your-password',
+    'port': '5432'
 }
 ```
 
 ## Usage
 
 1. Start the application:
+
 ```bash
 python postgres-client-app.py
 ```
 
-2. Once the application is running, you can:
-   - Execute SQL queries directly
-   - Use `\t <table_name>` to view table information
+2. Available commands:
+   - Execute any SQL query at the `postgres>` prompt
+   - Use `\t table_name` to view table structure
    - Type `exit` to quit the application
 
-### Example Commands
+### Examples
 
+View table information:
 ```sql
-postgres> SELECT * FROM users;
 postgres> \t users
-postgres> INSERT INTO users (name, email) VALUES ('John Doe', 'john@example.com');
-postgres> exit
 ```
 
-### Special Commands
+Execute a SELECT query:
+```sql
+postgres> SELECT * FROM users LIMIT 5;
+```
 
-- `\t <table_name>`: Shows column names, data types, and constraints for the specified table
-- `exit`: Closes the connection and exits the application
+Execute other SQL commands:
+```sql
+postgres> CREATE TABLE test (id serial PRIMARY KEY, name varchar(100));
+```
 
-## Output Formatting
+## Features in Detail
 
-- SELECT query results are displayed in a formatted table
-- Table information is displayed with column details and constraints
-- Non-SELECT queries return success/failure status
-- Error messages are clearly displayed when operations fail
+### Table Information Display
+- Column names
+- Data types
+- Constraints and default values
+- Nullable status
 
-## Error Handling
+### Query Result Formatting
+- Aligned columns
+- Automatic width adjustment
+- Row count display (Specially useful for DML statements)
+- Clear separation between header and data
 
-The application handles various types of errors:
-- Connection errors
-- SQL syntax errors
-- Permission errors
-- Invalid table names
-- Invalid commands
+## Security Note
 
-## Security Notes
-
-- Never commit your database credentials to version control
-- Consider using environment variables for sensitive connection details
-- Ensure proper database user permissions are set
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a new Pull Request
+Never commit `config.py` with real credentials to version control. Consider using environment variables or a secure secrets management system for production environments.

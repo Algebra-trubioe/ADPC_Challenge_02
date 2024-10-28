@@ -21,20 +21,6 @@ def connect_to_postgres():
         print(f"Error connecting to the database: {e}")
         exit(1)
 
-def print_table_info_not_formatted(cursor, table_name):
-    """
-    Prints the name of the columns, their data types, and constraints (if applicable)
-    for the given table.
-    """
-    cursor.execute(f"SELECT * FROM information_schema.columns WHERE table_name = '{table_name}'")
-    columns = cursor.fetchall()
-    print(f"Table: {table_name}")
-    print("Column Name | Data Type | Constraints")
-    print("-" * 50)
-    for column in columns:
-        print(f"{column['column_name']} | {column['data_type']} | {column['column_default'], column['is_nullable']}")
-    print()
-
 def print_table_info(cursor, table_name):
     """
     Prints the name of the columns, their data types, and constraints (if applicable)
